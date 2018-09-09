@@ -168,6 +168,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Demo1Controller.cs" />
+    <Compile Include="Controllers\Demo2Controller.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MonHocController.cs" />
@@ -179,6 +181,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MonHocModels.cs" />
+    <Compile Include="Models\SoNguyenModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -251,6 +254,11 @@
     <Content Include="Views\NhapMon\ThongTinKhachHang.cshtml" />
     <Content Include="Views\MonHoc\ChiTiet.cshtml" />
     <Content Include="Views\MonHoc\DanhSach.cshtml" />
+    <Content Include="Views\Demo1\TinhTong.cshtml" />
+    <Content Include="Views\Demo1\PhepTinh.cshtml" />
+    <Content Include="Views\Demo1\PhepTinh2.cshtml" />
+    <Content Include="Views\Demo2\PhepTinh2.cshtml" />
+    <Content Include="Views\Demo2\PhepTinh2A.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,42 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Demo2: Phep Tinh 2</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container-fluid">
+        <h2>Demo 1: Tính tích 2 số nguyên</h2>
+        @using (Html.BeginForm())
+        {
+            <div class="form-group">
+                @Html.Label("SoA", "Số A", htmlAttributes: new { @class = "control-label" })
+                @Html.TextBox("SoA", null, htmlAttributes: new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                @Html.Label("SoB", "Số B", htmlAttributes: new { @class = "control-label" })
+                @Html.TextBox("SoB", null, htmlAttributes: new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                @Html.Label("SoC", "Số C", htmlAttributes: new { @class = "control-label" })
+                @Html.TextBox("SoC", null, htmlAttributes: new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Tổng" class="btn btn-success" formaction="@Url.Action("XuLyTinhTong")"/>
+                <input type="submit" value="Tích" class="btn btn-success" formaction="@Url.Action("XuLyTinhTich")"/>
+            </div>
+            <h4 class="text-success">@TempData["KetQua"]</h4>
+        }
+    </div>
+</body>
+</html>
