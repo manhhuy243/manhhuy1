@@ -1,0 +1,25 @@
+﻿@model MYWS.Models.MonHoc
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Chi tiết - môn học</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container-fluid">
+        <h2 class="page-header">chi tiết - Môn học</h2>
+        <p>Môn Học ID: @Model.MonHocID</p>
+        <p>Tên Môn Học ID: @Model.Ten</p>
+        <p>Số Tiết: @Model.SoTiet</p>
+        <div>
+            @Html.ActionLink("Xem Danh Sách","DanhSach")
+        </div>
+    </div>
+</body>
+</html>

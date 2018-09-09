@@ -1,0 +1,42 @@
+﻿@model List<MYWS.Models.MonHoc>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Danh Sách - Môn Học</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container-fluid">
+        <h2 class="page-header text-primary">Danh Sách - Môn Học</h2>  
+        <table class="table table-bordered">
+            <tr>
+                <th>Môn Học ID</th>
+                <th>Tên Môn Học</th>
+                <th>Số Tiết</th>
+                <th>Liên Kết</th>
+            </tr>
+            @foreach(var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.MonHocID
+                    </td>
+                    <td>
+                        @item.Ten
+                    </td>
+                    <td>
+                        @item.SoTiet
+                    </td>
+                    <td>@Html.ActionLink("Xem Chi Tiết","ChiTiet",new { id=item.MonHocID })</td>
+                </tr>
+            }
+        </table>
+    </div>
+</body>
+</html>
