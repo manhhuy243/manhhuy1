@@ -21,7 +21,13 @@
 
     <!-- styles -->
     <link href="~/obajuStyle/css/font-awesome.css" rel="stylesheet">
-    @Styles.Render("~/obaju/css")
+    <link href="~/obajuStyle/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/obajuStyle/css/animate.min.css" rel="stylesheet">
+    <link href="~/obajuStyle/css/owl.carousel.css" rel="stylesheet">
+    <link href="~/obajuStyle/css/owl.theme.css" rel="stylesheet">
+
+    <!-- theme stylesheet -->
+    <link href="~/obajuStyle/css/style.default.css" rel="stylesheet" id="theme-stylesheet">
 
     <!-- your stylesheet with modifications -->
     <link href="~/obajuStyle/css/custom.css" rel="stylesheet">
@@ -42,6 +48,8 @@
             @RenderBody()
         </div>
         @Html.Partial("_FooterPartial")
+        <!-- *** COPYRIGHT ***
+    _________________________________________________________ -->
         <div id="copyright">
             <div class="container">
                 <div class="col-md-6">
@@ -60,8 +68,15 @@
 
     </div>
 
+        <!-- *** SCRIPTS TO INCLUDE ***
+        _________________________________________________________ -->
         <script src="~/obajuStyle/js/bootstrap.min.js"></script>
-        @Scripts.Render("~/obaju/js")
+        <script src="~/obajuStyle/js/jquery.cookie.js"></script>
+        <script src="~/obajuStyle/js/waypoints.min.js"></script>
+        <script src="~/obajuStyle/js/modernizr.js"></script>
+        <script src="~/obajuStyle/js/bootstrap-hover-dropdown.js"></script>
+        <script src="~/obajuStyle/js/owl.carousel.min.js"></script>
+        <script src="~/obajuStyle/js/front.js"></script>
     @*cho phép view chèn nội dung nếu có*@
     @RenderSection("Scripts",false)
 </body>

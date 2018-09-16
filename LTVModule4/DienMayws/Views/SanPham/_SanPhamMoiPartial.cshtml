@@ -1,0 +1,62 @@
+﻿@model List<SanPham>
+
+<!-- *** HOT PRODUCT SLIDESHOW ***
+_________________________________________________________ -->
+<div id="hot">
+
+    <div class="box">
+        <div class="container">
+            <div class="col-md-12">
+                <h2>Sản Phẩm Mới Nhất</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="product-slider">
+            @foreach (var item in Model)
+            {
+                <div class="item">
+                    <div class="product">
+                        <div class="flip-container">
+                            <div class="flipper">
+                                <div class="front">
+                                    <a href="@Url.Action("ChiTiet",new { id=item.SanPhamID })">
+                                        <img src="~/Photos/@item.Hinh1" alt="" class="img-responsive" style="height:176px;">
+                                    </a>
+                                </div>
+                                <div class="back">
+                                    @if (item.Hinh2 != null)
+                                    {
+
+                                        <img src="~/Photos/@item.Hinh2" alt="" class="img-responsive" style="height:176px;">
+                                    }
+                                    else
+                                    {
+                                        <img src="~/Photos/@item.Hinh1" alt="" class="img-responsive" style="height:176px;">
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <a href="@Url.Action("ChiTiet",new { id=item.SanPhamID })" class="invisible">
+                            <img src="~/Photos/@item.Hinh1" alt="" class="img-responsive" style="height:176px;">
+                        </a>
+                        <div class="text">
+                            <h3>
+                                @Html.ActionLink(item.Ten, "ChiTiet", new { id = item.SanPhamID })
+                            </h3>
+                            <p class="price">@item.GiaBan.ToString("#,##0VND")</p>
+                        </div>
+                        <!-- /.text -->
+                    </div>
+                    <!-- /.product -->
+                </div>
+            }
+        </div>
+        <!-- /.product-slider -->
+    </div>
+    <!-- /.container -->
+
+</div>
+<!-- /#hot -->
+<!-- *** HOT END *** -->

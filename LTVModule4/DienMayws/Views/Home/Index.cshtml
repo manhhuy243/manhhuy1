@@ -2,6 +2,9 @@
     ViewBag.Title = "Trang Chủ";
     Layout = "~/Views/Shared/_DienMayLayout.cshtml";
 }
-
+@* 1-tích hợp PArtial view(tĩnh) vào *@
 @Html.Partial("_MainSliderPartial")
+
+@* 2-tích hợp Partial view(động) vào*@
+@Html.Action("_SanPhamMoiPartial","SanPham")
 

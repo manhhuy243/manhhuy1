@@ -26,6 +26,24 @@ namespace DienMayws
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+            //--- obaju:
+            bundles.Add(new StyleBundle("~/obaju/css").Include(
+                      "~/obajuStyle/css/bootstrap.css",
+                      "~/obajuStyle/css/animate.min.css",
+                      "~/obajuStyle/css/owl.carousel.css",
+                      "~/obajuStyle/css/owl.theme.css",
+                      "~/obajuStyle/css/style.default.css"
+
+                ));
+            bundles.Add(new ScriptBundle("~/obaju/js").Include(
+                     "~/obajuStyle/js/jquery.cookie.js",
+                     "~/obajuStyle/js/waypoints.min.js",
+                     "~/obajuStyle/js/modernizr.js",
+                     "~/obajuStyle/js/bootstrap-hover-dropdown.js",
+                     "~/obajuStyle/js/owl.carousel.min.js",
+                     "~/obajuStyle/js/front.js"
+                ));
+            BundleTable.EnableOptimizations = true;
         }
     }
 }
