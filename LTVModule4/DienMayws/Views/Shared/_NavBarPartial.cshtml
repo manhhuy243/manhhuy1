@@ -28,9 +28,13 @@
         <div class="navbar-collapse collapse" id="navigation">
 
             <ul class="nav navbar-nav navbar-left">
-                <li class="active"><a href="index.html">Home</a></li>
-                <li><a href="#">Product</a></li>
-                <li><a href="category-right.html">Category</a></li>
+                <li class="@ViewBag.TrangChuActive">
+                @Html.ActionLink("Trang Chủ","Index","Home")
+                </li>
+                <li class="@ViewBag.SanPhamActive">
+                    @Html.ActionLink("Sản Phẩm","List","SanPham")
+                </li>
+                
             </ul>
 
         </div>

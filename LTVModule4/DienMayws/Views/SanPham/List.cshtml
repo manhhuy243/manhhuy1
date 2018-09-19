@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_DienMayLayout.cshtml";
+    var dsSanPham = ViewBag.SanPhams as List<SanPham>;
+}
+
+<div class="container">
+    <div class="col-md-9">
+        <div class="box">
+            <h1>@ViewBag.TieuDe</h1>
+        </div>
+        <div class="row products">
+            @foreach (var item in dsSanPham)
+            {
+                <div class="col-md-4 col-sm-6">
+                    <div class="product">
+                        <div class="flip-container">
+                            <div class="flipper">
+                                <div class="front">
+                                    <a href="@Url.Action("ChiTiet",new { id=item.SanPhamID })">
+                                        <img src="~/Photos/@item.Hinh1" alt="" class="img-responsive" style="height:176px;">
+                                    </a>
+                                </div>
+                                <div class="back">
+                                    <a href="@Url.Action("ChiTiet",new { id=item.SanPhamID })">
+                                        @if (item.Hinh2 != null)
+                                        {
+                                            <img src="~/Photos/@item.Hinh2" alt="" class="img-responsive" style="height:176px;">
+                                        }
+                                        else
+                                        {
+                                            <img src="~/Photos/@item.Hinh1" alt="" class="img-responsive" style="height:176px;">
+                                        }
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="@Url.Action("ChiTiet",new { id=item.SanPhamID })" class="invisible">
+                            <img src="~/Photos/@item.Hinh1" alt="" class="img-responsive" style="height:176px;">
+                        </a>
+                        <div class="text">
+                            <h3><a href="@Url.Action("ChiTiet",new { id=item.SanPhamID })">@item.Ten</a></h3>
+                            <p class="price">@item.GiaBan</p>
+                            <p class="buttons">
+                                @*<a href="@Url.Action("ChiTiet",new { id=item.SanPhamID })" class="btn btn-default">View detail</a>*@
+                                @Html.ActionLink("View detail", "ChiTiet", new { id = item.SanPhamID }, htmlAttributes: new { @class= "btn btn-default" })
+                                <a href="#" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                            </p>
+                        </div>
+                        <!-- /.text -->
+                    </div>
+                    <!-- /.product -->
+                </div>
+            }
+        </div>
+    </div>
+    <div class="col-md-3">
+        @Html.Action("_ChungLoaiMenu2Partial", "ChungLoai")
+    </div>
+
+</div>

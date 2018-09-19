@@ -48,7 +48,8 @@ namespace DienMayws.Controllers
             }
             try
             {
-                SanPham item = db.SanPhams.Find(id);
+                SanPham item = db.SanPhams.Include(p=>p.NhaSanXuat)
+                                          .SingleOrDefault(p=>p.SanPhamID==id);
                 if (item == null) throw new Exception("Id=" + id + "không tồn tại");
                 //chỉ định view mặc định hiển thị và truyền dữ liệu qua Model object
                 return View(item);//pt3
@@ -60,7 +61,29 @@ namespace DienMayws.Controllers
                 return View("ThongBao",cauBaoLoi);//pt6
             }
 
-
+        }
+        //Get: SanPham/List/
+        public ViewResult List()
+        {
+            try
+            {
+                //đọc 6 sản phẩm mới nhất
+                List<SanPham> items = db.SanPhams
+                                      .OrderByDescending(p => p.SanPhamID)
+                                      .Take(6)
+                                      .ToList();
+                ViewBag.SanPhams = items;
+                ViewBag.TieuDe = "Danh sách sản phẩm";
+                ViewBag.SanPhamActive = "active";
+                //chỉ định view mặc định hiển thị
+                return View();//pt1
+            }
+            catch(Exception ex)
+            {
+                object cauBaoLoi="Lỗi truy cập dữ liệu.<br/>Lý do:"+ex.Message;
+                //chỉ định view "thongbao" hiển thị và truyền câu thông báo lỗi sang
+                return View("ThongBao", cauBaoLoi);//pt6
+            }
         }
     }
 }

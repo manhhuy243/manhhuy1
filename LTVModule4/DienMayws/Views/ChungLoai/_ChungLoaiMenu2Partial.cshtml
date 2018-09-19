@@ -1,0 +1,35 @@
+﻿@{
+    var dsChungLoai = ViewBag.ChungLoais as List<ChungLoaiViewModel>;
+}
+<!-- *** MENUS AND FILTERS ***
+_________________________________________________________ -->
+<div class="panel panel-default sidebar-menu">
+
+    <div class="panel-heading">
+        <h3 class="panel-title">Chủng Loại</h3>
+    </div>
+
+    <div class="panel-body">
+        <ul class="nav nav-pills nav-stacked category-menu">
+            @foreach (var chungloaiItem in dsChungLoai)
+            {
+                <li>
+                    <a href="@Url.Action("TraCuuTheoChungLoai", "SanPham", new { id = chungloaiItem.ChungLoaiID })">
+                        @chungloaiItem.Ten
+                        <span class="badge pull-right">@chungloaiItem.TongSoSanPham</span>
+                    </a>
+                    <ul>
+                        @foreach (var loaiItem in chungloaiItem.Loais)
+                        {
+                            <li>
+                                @Html.ActionLink(loaiItem.Ten, "TraCuuTheoLooai", "SanPham", new { id = loaiItem.LoaiID }, null)
+                            </li>
+                        }
+                    </ul>
+                </li>
+            }
+
+        </ul>
+
+    </div>
+</div>

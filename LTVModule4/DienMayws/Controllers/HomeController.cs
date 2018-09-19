@@ -10,6 +10,7 @@ namespace DienMayws.Controllers
     {
         public ActionResult Index()
         {
+            ViewBag.TrangChuActive = "active";
             return View();
         }
 
