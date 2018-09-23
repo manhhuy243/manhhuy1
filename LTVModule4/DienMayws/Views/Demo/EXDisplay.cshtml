@@ -1,0 +1,29 @@
+﻿@model HoaDon
+@{
+    Layout = null;
+ }
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="with=device-width" />
+    <title>EXDisplay</title>
+    </head>
+<body>
+    <div>
+        @Html.DisplayName("NgayDatHang")
+        @Html.DisplayFor(m=>m.NgayDatHang)
+
+        <b>@Html.DisplayTextFor(m=>m.NgayDatHang)</b>
+    </div>
+
+    <div>
+        @Html.LabelFor(m=>m.TongTien)
+        @Html.DisplayFor(m=>m.TongTien)
+        <b>@Html.DisplayTextFor(m=>m.TongTien)</b>
+    </div>
+
+    <div>
+        @Html.EditorFor(m=>m.NgayDatHang)
+    </div>
+</body>

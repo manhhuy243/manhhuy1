@@ -9,10 +9,19 @@ namespace DienMayws.Controllers
 {
     public class DemoController : Controller
     {
+
+        DienMayDBContext db = new DienMayDBContext();
+
+        public ViewResult EXDisplay()
+        {
+            HoaDon item = db.HoaDons.FirstOrDefault();
+            return View(item);
+
+        }
         // GET: Demo/TestModel
         public ViewResult TestModel()
         {
-            DienMayDBContext db = new DienMayDBContext();
+
             List<Loai> items = db.Loais.ToList();
             return View();
         }

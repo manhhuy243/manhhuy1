@@ -85,5 +85,35 @@ namespace DienMayws.Controllers
                 return View("ThongBao", cauBaoLoi);//pt6
             }
         }
+
+        //Get: SanPham/TraCuuTheoChungLoai/3
+        public ActionResult TraCuuTheoChungLoai(int? id)
+        {
+            if (id == null || id < 1) return RedirectToAction("List");
+            try
+            {
+
+                ChungLoai chungLoaiItem = db.ChungLoais.Find(id);
+
+                List<SanPham> sanPhamItems = db.SanPhams
+                                             .Where(p => p.Loai.ChungLoaiID == id)
+                                             .OrderByDescending(p => p.SanPhamID)
+                                             .ToList();
+
+                //truyền dữ liệu qua view
+                ViewBag.SanPhams = sanPhamItems;
+                ViewBag.TieuDe = "Danh sách sản phẩm - " + chungLoaiItem.Ten;
+            }
+            catch (Exception ex)
+            {
+                //object cauBaoLoi = "lỗi truy cập dữ liệu.<br/>Lý Do: "+ex.Message;
+                ////chỉ định view "ThongBao" hiển thị và truyền câu báo lỗi sang 
+                //return View("ThongBao", cauBaoLoi);//pt6
+                ViewBag.TieuDe = "Sản Phẩm Không Tồn Tại.";
+                ViewBag.SanPhams = new List<SanPham>();                         
+            }
+            //Chỉ Định view "List" hiển thị     
+            return View("List");
+        }
     }
 }

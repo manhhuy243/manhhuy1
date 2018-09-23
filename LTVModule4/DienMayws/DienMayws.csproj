@@ -198,6 +198,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AdminLoaiController.cs" />
     <Compile Include="Controllers\ChungLoaiController.cs" />
     <Compile Include="Controllers\DemoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -225,6 +227,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DienMay.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\DienMayMetadata.cs" />
     <Compile Include="Models\HoaDon.cs">
       <DependentUpon>DienMay.tt</DependentUpon>
     </Compile>
@@ -878,6 +881,14 @@
     <Content Include="Views\ChungLoai\_ChungLoaiMenu1Partial.cshtml" />
     <Content Include="Views\ChungLoai\_ChungLoaiMenu2Partial.cshtml" />
     <Content Include="Views\SanPham\List.cshtml" />
+    <Content Include="Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Demo\EXDisplay.cshtml" />
+    <Content Include="Views\AdminLoai\Create.cshtml" />
+    <Content Include="Views\AdminLoai\Delete.cshtml" />
+    <Content Include="Views\AdminLoai\Details.cshtml" />
+    <Content Include="Views\AdminLoai\Edit.cshtml" />
+    <Content Include="Views\AdminLoai\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
