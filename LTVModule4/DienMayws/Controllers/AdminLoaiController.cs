@@ -136,14 +136,29 @@ namespace DienMayws.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "LoaiID,Ten,ChungLoaiID,BiDanh")] Loai loai)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(loai).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    //trường hợp dữ liệu nhập hợp lệ(không vi phạm các kiểm tra cài đặt trong data model)
+                    loai.BiDanh = XuLyDuLieu.LoaiBoDauTiengViet(loai.Ten);
+                    db.Entry(loai).State = EntityState.Modified;
+                    db.SaveChanges();
+                    // lưu thành công
+                    //điều hướng về action Index của controller điều hành
+                    return RedirectToAction("Index");
+                }
+                //trường hợp dữ liệu nhập không hợp lệ
+                //quay trở lại view và chuyền lại  dữ liệu
+                List<ChungLoai> chungLoaiItems = db.ChungLoais.ToList();
+                ViewBag.ChungLoaiID = new SelectList(db.ChungLoais, "ChungLoaiID", "Ten", loai.ChungLoaiID);
+                return View(loai);
             }
-            ViewBag.ChungLoaiID = new SelectList(db.ChungLoais, "ChungLoaiID", "Ten", loai.ChungLoaiID);
-            return View(loai);
+            catch (Exception ex)
+            {
+                object cauBaoLoi = "cập nhật không thành công.<br/>" + ex.Message;
+                return View("Error", cauBaoLoi);//pt6
+            }
         }
         #endregion
 
