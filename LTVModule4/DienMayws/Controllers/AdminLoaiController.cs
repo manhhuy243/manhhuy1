@@ -106,18 +106,27 @@ namespace DienMayws.Controllers
         #region sữa
         // GET: AdminLoai/Edit/5
         public ActionResult Edit(int? id)
-        {
-            if (id == null)
+        {           
+            // nếu id = null trở về trang chủ
+            if (id == null || id < 1) return RedirectToAction("Index");
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                Loai loai = db.Loais.Find(id);
+
+                if (loai == null)
+                {
+                    throw new Exception("Loại ID: " + id + " Không tồn tại!");
+                }
+                List<ChungLoai> chungLoaiItem = db.ChungLoais.ToList();
+                ViewBag.ChungLoaiID = new SelectList(chungLoaiItem, "ChungLoaiID", "Ten");
+                
+                return View(loai);
             }
-            Loai loai = db.Loais.Find(id);
-            if (loai == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                object cauBaoLoi = "Lỗi truy cập dữ liệu.<br/>" + ex.Message;
+                return View("Error", cauBaoLoi);//pt6
             }
-            ViewBag.ChungLoaiID = new SelectList(db.ChungLoais, "ChungLoaiID", "Ten", loai.ChungLoaiID);
-            return View(loai);
         }
 
         // POST: AdminLoai/Edit/5
