@@ -15,52 +15,95 @@ namespace DienMayws.Controllers
         private DienMayDBContext db = new DienMayDBContext();
 
         // GET: AdminLoai
+        #region xem thông tin
         public ActionResult Index()
         {
-            var loais = db.Loais.Include(l => l.ChungLoai);
-            return View(loais.ToList());
+            //bẩy lỗi trên view
+            IQueryable<Loai> query = db.Loais
+                                       .Include(l => l.ChungLoai)
+                                       .AsQueryable();
+            ViewBag.LoaiAct = "active";
+            return View(query);
         }
 
         // GET: AdminLoai/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            // nếu id = null trở về trang chủ
+            if (id == null || id < 1) return RedirectToAction("Index");
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Loai loai = db.Loais.Find(id);
-            if (loai == null)
-            {
-                return HttpNotFound();
-            }
-            return View(loai);
-        }
+                Loai loai = db.Loais
+                              .Include(p => p.ChungLoai)
+                              .SingleOrDefault(p => p.LoaiID == id);
 
+                if (loai == null)
+                {
+                    throw new Exception("Loại ID: " + id + " Không tồn tại!");
+                }
+                return View(loai);
+            }
+            catch (Exception ex)
+            {
+                object cauBaoLoi = "Lỗi truy cập dữ liệu.<br/>" + ex.Message;
+                return View("Error", cauBaoLoi);//pt6
+            }
+
+        }
+        #endregion
+
+        #region tạo 
         // GET: AdminLoai/Create
         public ActionResult Create()
         {
-            ViewBag.ChungLoaiID = new SelectList(db.ChungLoais, "ChungLoaiID", "Ten");
-            return View();
+            try
+            {
+                //khởi tạo nguồn dữ liệu cho dropdownlist
+                List<ChungLoai> chungLoaiItem = db.ChungLoais.ToList();
+                ViewBag.ChungLoaiID = new SelectList(chungLoaiItem, "ChungLoaiID", "Ten");
+                return View();
+            }
+            catch(Exception ex)
+            {
+                object cauBaoLoi = "Lỗi truy cập dữ liệu.<br/>" + ex.Message;
+                return View("Error", cauBaoLoi);//pt6
+            }
         }
 
         // POST: AdminLoai/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "LoaiID,Ten,ChungLoaiID,BiDanh")] Loai loai)
+        [ValidateAntiForgeryToken]// chống mạo danh
+        public ActionResult Create(Loai loai)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Loais.Add(loai);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    //trường hợp dữ liệu nhập hợp lệ(không vi phạm các kiểm tra cài đặt trong data model)
+                    loai.BiDanh = XuLyDuLieu.LoaiBoDauTiengViet(loai.Ten);
+                    db.Loais.Add(loai);
+                    db.SaveChanges();
+                    // lưu thành công
+                    //điều hướng về action Index của controller điều hành
+                    return RedirectToAction("Index");
+                }
+                //trường hợp dữ liệu nhập không hợp lệ
+                //quay trở lại view và chuyền lại  dữ liệu
+                List<ChungLoai> chungLoaiItems = db.ChungLoais.ToList();
+                ViewBag.ChungLoaiID = new SelectList(db.ChungLoais, "ChungLoaiID", "Ten", loai.ChungLoaiID);
+                return View(loai);
             }
-
-            ViewBag.ChungLoaiID = new SelectList(db.ChungLoais, "ChungLoaiID", "Ten", loai.ChungLoaiID);
-            return View(loai);
+            catch(Exception ex)
+            {
+                object cauBaoLoi = "lưu thông tin không thành công.<br/>" + ex.Message;
+                return View("Error", cauBaoLoi);//pt6
+            }
         }
+        #endregion
 
+        #region sữa
         // GET: AdminLoai/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -93,7 +136,9 @@ namespace DienMayws.Controllers
             ViewBag.ChungLoaiID = new SelectList(db.ChungLoais, "ChungLoaiID", "Ten", loai.ChungLoaiID);
             return View(loai);
         }
+        #endregion
 
+        #region xoá
         // GET: AdminLoai/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -119,7 +164,9 @@ namespace DienMayws.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        #endregion
 
+        #region xoá biến db
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -128,5 +175,6 @@ namespace DienMayws.Controllers
             }
             base.Dispose(disposing);
         }
+        #endregion
     }
 }

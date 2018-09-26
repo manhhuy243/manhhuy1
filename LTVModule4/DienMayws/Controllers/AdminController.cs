@@ -11,6 +11,7 @@ namespace DienMayws.Controllers
         // GET: Admin
         public ActionResult Index()
         {
+            ViewBag.TrangChuAct = "active";
             return View();
         }
     }

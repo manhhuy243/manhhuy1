@@ -1,45 +1,56 @@
-﻿@model IEnumerable<DienMayws.Models.Loai>
-
+﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Loại: Index";
+    var errMsg = "";
+    WebGrid grip = null;
+    try
+    {
+        grip = new WebGrid(Model, rowsPerPage: 10);
+
+    }
+    catch (Exception ex)
+    {
+        errMsg = "lỗi truy cập dữ liệu. " + ex.Message;
+    }
 }
 
-<h2>Index</h2>
+<h2>Danh Sách Loại</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Ten)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BiDanh)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ChungLoai.Ten)
-        </th>
-        <th></th>
-    </tr>
+<div class="container-fluid">
+    <p class="text-right">
+        @Html.ActionLink("Thêm Mới","Create")
+    </p>
+    @if (grip != null)
+    {
+        int trangHienHanh = grip.PageIndex + 1;
+        //đang đứng ở trang bao nhiêu trên tổng số trang
+        <p>Trang:@trangHienHanh<text>/</text>@grip.PageCount</p>
+        <p>Tổng Số Loại: @grip.TotalRowCount</p>
+        @grip.GetHtml(
+                tableStyle: " table table-bordered table table-hover",
+                headerStyle: "bg-info canh-giua",
+                footerStyle: "bg-danger text-center",
+                mode:WebGridPagerModes.All,firstText:"Trang Đầu",lastText:"Trang Cuối",nextText:"Trang Kế",previousText:"Trang sau",
+                columns: grip.Columns
+                (
+                     grip.Column("LoaiID", "ID",style:"text-center"),
+                     grip.Column("Ten", "Tên Loại", format: item => Html.ActionLink((string)item.Ten, "Details", new { id = item.LoaiID })),
+                     grip.Column("BiDanh", "Bí Danh"),
+                     grip.Column("ChungLoai.Ten", "Tên Chủng Loại"),
+                     grip.Column(format:item=>Html.ActionLink("Hiệu Chỉnh","Edit",new { id=item.LoaiID})),
+                     grip.Column(format:item => Html.ActionLink("Xoá", "Delete", new { id = item.LoaiID }))
+                )
+        )
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ten)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BiDanh)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ChungLoai.Ten)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.LoaiID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.LoaiID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.LoaiID })
-        </td>
-    </tr>
-}
+    }
+        else
+        {
+        <h4 class="text-danger">@errMsg</h4>
+    }
 
-</table>
+</div>
+@section Styles{
+    <style>
+        .canh-giua>th{text-align:center!important}
+    </style>
+    }

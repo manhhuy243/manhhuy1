@@ -6,6 +6,7 @@
     <title>@ViewBag.Title - Admin</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("Styles",false)
 
 </head>
 <body>
@@ -21,9 +22,9 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Trang Chủ", "Index", "Admin")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li class="@ViewBag.TrangChuAct">@Html.ActionLink("Trang Chủ", "Index", "Admin")</li>
+                    <li class="@ViewBag.LoaiAct">@Html.ActionLink("Loại", "Index", "AdminLoai")</li>
+                   
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -33,7 +34,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Đồ án môn học Hệ Thống Thương Mại Điện Tử</p>
         </footer>
     </div>
 
