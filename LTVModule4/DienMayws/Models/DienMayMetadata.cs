@@ -77,7 +77,75 @@ namespace DienMayws.Models
 
             [Display(Name = "Bí Danh")]
             public string BiDanh;
+
+
         }
 
+    }
+    public partial class SanPham
+    {
+        internal class SanPhamMetadata
+        {
+            private SanPhamMetadata() { }
+            [ScaffoldColumn(false)]
+            public int SanPhamID;
+
+            [Display(Name ="Nhà Sản Xuất")]
+            public Nullable<int> NhaSanXuatID;
+
+            [Display(Name = "Loại")]
+            public Nullable<int> LoaiID;
+
+            [Display(Name = "Tên Sản Phẩm")]
+            [Required(ErrorMessage = "{0} không được để trống")]
+            //[StringLength(50,ErrorMessage ="{0} tối đa là {1} ký tự")]
+            [StringLength(50, MinimumLength = 2, ErrorMessage = "{0} từ {2} đến {1} ký tự")]
+            public string Ten;
+
+            [Display(Name ="Giá Bán")]
+            [Required(ErrorMessage = "{0} không được để trống")]
+            [Range(0,int.MaxValue,ErrorMessage ="{0} phải từ {1} đến {2}")]
+            public int GiaBan;
+
+            [Display(Name ="Mô Tả")]
+            [StringLength(250, MinimumLength = 2, ErrorMessage = "{0} từ {2} đến {1} ký tự")]
+            [DataType(DataType.Password)]
+            public string MoTa;
+
+            [Display(Name = "Xuất Xứ")]
+            public string XuatXu;
+
+            [Display(Name ="Trạng Thái")]
+            public string TrangThai;
+
+            [Display(Name = "Hình 1")]           
+            public string Hinh1;
+
+            [Display(Name = "Hình 2")]
+            public string Hinh2;
+
+            [Display(Name = "Hình 3")]
+            public string Hinh3;
+
+            [Display(Name = "Bí Danh")]
+            [ScaffoldColumn(false)]
+            public string BiDanh;
+
+            [Display(Name = "Kích Thước")]
+            public string KichCo;
+
+            [Display(Name = "Bang Tan")]
+            public string BangTan;
+
+            [Display(Name = "Camera")]
+            public string Camera;
+
+            [Display(Name = "GPRS")]
+            public string GPRS;
+
+            [Display(Name = "Đặc Tính")]
+            [StringLength(100, MinimumLength = 2, ErrorMessage = "{0} từ {2} đến {1} ký tự")]
+            public string DacTinh;
+        }
     }
 }

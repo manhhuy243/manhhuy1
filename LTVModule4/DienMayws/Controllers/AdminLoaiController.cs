@@ -79,6 +79,11 @@ namespace DienMayws.Controllers
         {
             try
             {
+                Loai l = db.Loais.SingleOrDefault(p => p.Ten == loai.Ten);
+                if (l != null)
+                {
+                    ModelState.AddModelError("Ten", "Tên thiết bị này đã tồn tại.");
+                }
                 if (ModelState.IsValid)
                 {
                     //trường hợp dữ liệu nhập hợp lệ(không vi phạm các kiểm tra cài đặt trong data model)
@@ -137,9 +142,14 @@ namespace DienMayws.Controllers
         public ActionResult Edit([Bind(Include = "LoaiID,Ten,ChungLoaiID,BiDanh")] Loai loai)
         {
             try
-            {
+            {               
                 if (ModelState.IsValid)
-                {
+                {                    
+                    int d = db.Loais.Count(p => p.LoaiID != loai.LoaiID && p.Ten == loai.Ten);
+                    if (d > 0)
+                    {
+                        ModelState.AddModelError("Ten", "Tên thiết bị này đã tồn tại.");
+                    }
                     //trường hợp dữ liệu nhập hợp lệ(không vi phạm các kiểm tra cài đặt trong data model)
                     loai.BiDanh = XuLyDuLieu.LoaiBoDauTiengViet(loai.Ten);
                     db.Entry(loai).State = EntityState.Modified;
@@ -163,31 +173,57 @@ namespace DienMayws.Controllers
         #endregion
 
         #region xoá
+        [HttpGet]
         // GET: AdminLoai/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            if (id == null||id<1)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
-            Loai loai = db.Loais.Find(id);
-            if (loai == null)
+            try
             {
-                return HttpNotFound();
+                Loai loai = db.Loais.Find(id);
+                if (loai == null)
+                {
+                    throw new Exception("Loại id= " + id + " không tồn tại.");
+                }
+                return View(loai);
             }
-            return View(loai);
+            catch(Exception ex)
+            {
+
+                object cauBaoLoi = "Lỗi truy cập dữ liệu.<br/>" + ex.Message;
+                return View("Error", cauBaoLoi);//pt6
+            }
         }
+
 
         // POST: AdminLoai/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Loai loai = db.Loais.Find(id);
-            db.Loais.Remove(loai);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+            try {
+                Loai loai = db.Loais.Find(id);
+                db.Loais.Remove(loai);
+                db.SaveChanges();
+                //huỷ thành công, điều hướng về action index của controller hiện hành
+                //--> điều hướng về trang danh sách loại
+                return RedirectToAction("Index");
+
+            }
+            catch(Exception ex)
+            {
+                object cauBaoLoi = "Lỗi truy cập dữ liệu.<br/>";
+                int d = db.SanPhams.Count(p => p.LoaiID == id);
+                if (d > 0)
+                    cauBaoLoi += "Vì đã có thông tin về sản phẩm liên quan ";
+                else
+                    cauBaoLoi += ex.Message;
+                return View("Error", cauBaoLoi);//pt6
+            }
+         }
         #endregion
 
         #region xoá biến db

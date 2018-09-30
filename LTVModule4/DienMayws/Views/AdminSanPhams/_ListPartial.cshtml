@@ -1,0 +1,47 @@
+﻿@{
+    var errMsg = "";
+    WebGrid grip = null;
+    try
+    {
+        grip = new WebGrid(ViewBag.SanPhams, rowsPerPage: 5, ajaxUpdateContainerId: "containerUpdate");
+
+    }
+    catch (Exception ex)
+    {
+        errMsg = "Lỗi truy cập dữ liệu." + ex.Message;
+    }
+}
+<div id="containerUpdate">
+    @if (grip != null)
+    {
+        string photoURL = Url.Content("~/Photos");
+        int trangHienHanh = grip.PageIndex + 1;
+        //đang đứng ở trang bao nhiêu trên tổng số trang
+        <p>Trang:@trangHienHanh<text>/</text>@grip.PageCount</p>
+        <p>Tổng Số Loại: @grip.TotalRowCount</p>
+        @grip.GetHtml(
+                tableStyle: " table table-bordered table table-hover",
+                headerStyle: "bg-info canh-giua",
+                footerStyle: "bg-danger text-center",
+                mode: WebGridPagerModes.All, firstText: "Trang Đầu", lastText: "Trang Cuối", nextText: "Trang Kế", previousText: "Trang sau",
+                columns: grip.Columns
+                (
+                     grip.Column("SanPhamID", "ID", style: "text-center"),
+                     grip.Column("Ten", "Tên Sản Phẩm", format: item => Html.ActionLink((string)item.Ten, "Details", new { id = item.SanPhamID })),
+                     grip.Column("GiaBan", "Giá Bán", format: item => item.GiaBan.ToString("#,##0VND"), style: "Text-right"),
+                     grip.Column("NhaSanXuat.Ten", "Nhà sản xuất"),
+                     grip.Column(header: "Hình", format: item => Html.Raw(string.Format("<img src='{0}/{1}' style='width:50px;height:50px'/>", photoURL, item.Hinh1))),
+                     grip.Column(format: item => Html.ActionLink("Hiệu Chỉnh", "Edit", new { id = item.SanPhamID })),
+                     grip.Column(format: item => Html.ActionLink("Xoá", "Delete", new { id = item.SanPhamID }))
+
+
+                 )
+        )
+
+    }
+    else
+    {
+        <h4 class="text-danger">@errMsg</h4>
+    }
+
+</div>

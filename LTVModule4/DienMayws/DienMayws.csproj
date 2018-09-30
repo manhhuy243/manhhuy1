@@ -200,6 +200,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AdminLoaiController.cs" />
+    <Compile Include="Controllers\AdminSanPhamsController.cs" />
     <Compile Include="Controllers\ChungLoaiController.cs" />
     <Compile Include="Controllers\DemoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -890,6 +891,18 @@
     <Content Include="Views\AdminLoai\Details.cshtml" />
     <Content Include="Views\AdminLoai\Edit.cshtml" />
     <Content Include="Views\AdminLoai\Index.cshtml" />
+    <Content Include="Views\SanPhams\Create.cshtml" />
+    <Content Include="Views\SanPhams\Delete.cshtml" />
+    <Content Include="Views\SanPhams\Details.cshtml" />
+    <Content Include="Views\SanPhams\Edit.cshtml" />
+    <Content Include="Views\SanPhams\Index.cshtml" />
+    <Content Include="Views\AdminSanPhams\Create.cshtml" />
+    <Content Include="Views\AdminSanPhams\Delete.cshtml" />
+    <Content Include="Views\AdminSanPhams\Details.cshtml" />
+    <Content Include="Views\AdminSanPhams\Edit.cshtml" />
+    <Content Include="Views\AdminSanPhams\Index.cshtml" />
+    <Content Include="Views\AdminSanPhams\List.cshtml" />
+    <Content Include="Views\AdminSanPhams\_ListPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

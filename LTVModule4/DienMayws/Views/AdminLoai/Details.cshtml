@@ -36,6 +36,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Hiệu Chỉnh", "Edit", new { id = Model.LoaiID }) |
-    @Html.ActionLink("Trở Lại", "Index")
+    @Html.ActionLink("Hiệu Chỉnh", "Edit", new { id = Model.LoaiID }, htmlAttributes: new { @class = "btn btn-default" }) |
+    @Html.ActionLink("Trở Lại", "Index", null, htmlAttributes: new { @class = "btn btn-default" })
 </p>

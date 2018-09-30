@@ -4,11 +4,11 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
+<h2 class="page-header">Xoá thông tin - Loại</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Bạn có thực sự muốn xoá thông tin này?</h3>
 <div>
-    <h4>Loai</h4>
+    <h4>Thông tin chi tiết</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -19,21 +19,6 @@
             @Html.DisplayFor(model => model.Ten)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.BiDanh)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.BiDanh)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ChungLoai.Ten)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ChungLoai.Ten)
-        </dd>
 
     </dl>
 
@@ -41,8 +26,9 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Đồng ý" class="btn btn-default" /> |
+            @Html.ActionLink("Trở Lại", "Index",null,htmlAttributes:new { @class="btn btn-default"})
+                
         </div>
     }
 </div>

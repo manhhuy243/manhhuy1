@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "List";
+}
+
+<div class="container-fluid">
+    <h2>Danh Sách Sản Phẩm</h2>
+    <p class="text-right">
+       @Html.ActionLink("Thêm Mới", "Create")
+    </p>
+    @Html.Partial("_ListPartial")
+</div>
+

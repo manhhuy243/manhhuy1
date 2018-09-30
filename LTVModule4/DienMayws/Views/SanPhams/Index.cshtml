@@ -1,0 +1,123 @@
+﻿@model IEnumerable<DienMayws.Models.SanPham>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Ten)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GiaBan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MoTa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.XuatXu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TrangThai)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KichCo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BangTan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Camera)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GPRS)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DacTinh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BiDanh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Hinh1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Hinh2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Hinh3)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Loai.Ten)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NhaSanXuat.Ten)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ten)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GiaBan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MoTa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.XuatXu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TrangThai)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KichCo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BangTan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Camera)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GPRS)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DacTinh)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BiDanh)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hinh1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hinh2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hinh3)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Loai.Ten)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NhaSanXuat.Ten)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.SanPhamID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.SanPhamID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.SanPhamID })
+        </td>
+    </tr>
+}
+
+</table>
