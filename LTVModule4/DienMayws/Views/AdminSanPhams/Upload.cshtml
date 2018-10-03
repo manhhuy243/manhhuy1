@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "Upload";
+}
+
+<h2 class="page-header">Upload photos</h2>
+<h4 class="text-info">@ViewBag.ThongTinSanPham</h4>
+<h4 class="text-danger">@ViewBag.ThongBao</h4>
+@using (Html.BeginForm("Upload", "AdminSanPham", FormMethod.Post, htmlAttributes: new { @enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.Hidden("sanphamid", (int)ViewBag.SanPhamID)
+    <div>
+        <label>Hình 1:</label>
+        <input type="file" name="hinh1" />
+    </div>
+    <div>
+        <label>Hình 2:</label>
+        <input type="file" name="hinh2"/>
+    </div>
+    <div>
+        <label>Hình 3:</label>
+        <input type="file" name="hinh3" />
+    </div>
+    <input type="submit" value="Upload" class="btn btn-success"/>
+}

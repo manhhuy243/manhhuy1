@@ -32,7 +32,8 @@
                      grip.Column("NhaSanXuat.Ten", "Nhà sản xuất"),
                      grip.Column(header: "Hình", format: item => Html.Raw(string.Format("<img src='{0}/{1}' style='width:50px;height:50px'/>", photoURL, item.Hinh1))),
                      grip.Column(format: item => Html.ActionLink("Hiệu Chỉnh", "Edit", new { id = item.SanPhamID })),
-                     grip.Column(format: item => Html.ActionLink("Xoá", "Delete", new { id = item.SanPhamID }))
+                     grip.Column(format: item => Html.ActionLink("Xoá", "Delete", new { id = item.SanPhamID })),
+                     grip.Column(format: item => Html.ActionLink("Tải Hình lên", "Upload", new { id = item.SanPhamID }))
 
 
                  )

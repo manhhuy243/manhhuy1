@@ -43,7 +43,7 @@ namespace DienMayws
                      "~/obajuStyle/js/owl.carousel.min.js",
                      "~/obajuStyle/js/front.js"
                 ));
-            BundleTable.EnableOptimizations = true;
+          //  BundleTable.EnableOptimizations = true;
         }
     }
 }

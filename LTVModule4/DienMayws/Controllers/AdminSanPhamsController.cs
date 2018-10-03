@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DienMayws.Models;
+using System.IO;
 
 namespace DienMayws.Controllers
 {
@@ -179,7 +180,118 @@ namespace DienMayws.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-#endregion
+        #endregion
+        #region Xử lý upload photo
+        // GET: AdminSanPham/Upload/5
+        public ActionResult Upload(int? id)
+        {
+            if (id == null || id < 1) return RedirectToAction("Index");
+            try
+            {
+                SanPham sanPham = db.SanPhams.Find(id);
+                if (sanPham == null) throw new Exception("Sản phẩm ID=" + id + " không tồn tại.");
+                ViewBag.SanPhamID = id;
+                ViewBag.ThongTinSanPham = sanPham.Ten;
+                return View();
+            }
+            catch (Exception ex)
+            {
+                object cauBaoLoi = "Không truy cập được dữ liệu.<br/>" + ex.Message;
+                return View("Error", cauBaoLoi);
+            }
+        }
+
+        // Post: AdminSanPham/Upload/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Upload(int sanphamid, HttpPostedFileBase hinh1, HttpPostedFileBase hinh2, HttpPostedFileBase hinh3)
+        {
+            try
+            {
+                if ((hinh1 ?? hinh2 ?? hinh3) == null)
+                {
+                    ViewBag.SanPhamID = sanphamid;
+                    ViewBag.ThongBao = "Bạn chưa chọn tập tin";
+                    return View();
+                }
+                SanPham sanpham = db.SanPhams.Find(sanphamid);
+                string photosURL = Server.MapPath("~/Photos/");
+                if (hinh1 != null && hinh1.ContentLength > 0)
+                {
+                    string kieu = Path.GetExtension(hinh1.FileName);
+                    string tenHinh = string.Format("{0}-1{1}", sanpham.SanPhamID, kieu);
+                    hinh1.SaveAs(photosURL + tenHinh);
+                    if (!string.IsNullOrEmpty(sanpham.Hinh1) && tenHinh != sanpham.Hinh1)
+                    {
+                        if (System.IO.File.Exists(photosURL + sanpham.Hinh1))
+                            System.IO.File.Delete(photosURL + sanpham.Hinh1);
+
+
+                    }
+                    sanpham.Hinh1 = tenHinh;
+                }
+                if (hinh2 != null && hinh2.ContentLength > 0)
+                {
+                    string kieu = Path.GetExtension(hinh2.FileName);
+                    string tenHinh = string.Format("{0}-2{1}", sanpham.SanPhamID, kieu);
+                    hinh2.SaveAs(photosURL + tenHinh);
+                    if (!string.IsNullOrEmpty(sanpham.Hinh2) && tenHinh != sanpham.Hinh2)
+                    {
+                        if (System.IO.File.Exists(photosURL + sanpham.Hinh2))
+                            System.IO.File.Delete(photosURL + sanpham.Hinh2);
+
+
+                    }
+                    sanpham.Hinh2 = tenHinh;
+                }
+                if (hinh3 != null && hinh3.ContentLength > 0)
+                {
+                    string kieu = Path.GetExtension(hinh3.FileName);
+                    string tenHinh = string.Format("{0}-3{1}", sanpham.SanPhamID, kieu);
+                    hinh3.SaveAs(photosURL + tenHinh);
+                    if (!string.IsNullOrEmpty(sanpham.Hinh3) && tenHinh != sanpham.Hinh3)
+                    {
+                        if (System.IO.File.Exists(photosURL + sanpham.Hinh3))
+                            System.IO.File.Delete(photosURL + sanpham.Hinh3);
+
+
+                    }
+                    sanpham.Hinh3 = tenHinh;
+                }
+                db.Entry(sanpham).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                object cauBaoLoi = "Lỗi server.<br/>" + ex.Message;
+                return View("Error", cauBaoLoi);
+            }
+
+        }
+
+        #endregion
+        #region sử dụng remote attribute
+        public JsonResult KiemTraTrungTenSanPham(string Ten,int? SanPhamID)
+            {
+            int kq = 0;
+            if(SanPhamID==null)
+            {
+                //Thêm
+                kq = db.SanPhams.Count(p => p.Ten == Ten);
+            }
+            else
+            {
+                //Sửa
+                kq = db.SanPhams.Count(p => p.SanPhamID != SanPhamID && p.Ten == Ten);
+            }
+            if(kq>0)
+            {
+                return Json("Tên Sản Phẩm Bị Trùng", JsonRequestBehavior.AllowGet);
+            }
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
         protected override void Dispose(bool disposing)
         {
             if (disposing)

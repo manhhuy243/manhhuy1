@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace DienMayws.Models
 {
@@ -82,6 +83,8 @@ namespace DienMayws.Models
         }
 
     }
+
+    [MetadataType(typeof(SanPham.SanPhamMetadata))]
     public partial class SanPham
     {
         internal class SanPhamMetadata
@@ -100,7 +103,8 @@ namespace DienMayws.Models
             [Required(ErrorMessage = "{0} không được để trống")]
             //[StringLength(50,ErrorMessage ="{0} tối đa là {1} ký tự")]
             [StringLength(50, MinimumLength = 2, ErrorMessage = "{0} từ {2} đến {1} ký tự")]
-            public string Ten;
+            [Remote("KiemTraTrungTenSanPham", "AdminSanPhams",AdditionalFields ="SanPhamID")]
+            public string Ten { get; set; }
 
             [Display(Name ="Giá Bán")]
             [Required(ErrorMessage = "{0} không được để trống")]

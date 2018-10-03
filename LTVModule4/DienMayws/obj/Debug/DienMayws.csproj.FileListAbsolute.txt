@@ -244,3 +244,7 @@ C:\Users\HV\Documents\GitHub\manhhuy1\LTVModule4\DienMayws\bin\Microsoft.Owin.Se
 C:\Users\HV\Documents\GitHub\manhhuy1\LTVModule4\DienMayws\obj\Debug\DienMayws.dll
 C:\Users\HV\Documents\GitHub\manhhuy1\LTVModule4\DienMayws\obj\Debug\DienMayws.pdb
 C:\Users\HV\Documents\GitHub\manhhuy1\LTVModule4\DienMayws\obj\Debug\DienMayws.csprojResolveAssemblyReference.cache
+C:\Users\HV\Documents\GitHub\manhhuy1\LTVModule4\DienMayws\bin\PagedList.dll
+C:\Users\HV\Documents\GitHub\manhhuy1\LTVModule4\DienMayws\bin\PagedList.Mvc.dll
+C:\Users\HV\Documents\GitHub\manhhuy1\LTVModule4\DienMayws\bin\PagedList.xml
+C:\Users\HV\Documents\GitHub\manhhuy1\LTVModule4\DienMayws\bin\PagedList.Mvc.xml

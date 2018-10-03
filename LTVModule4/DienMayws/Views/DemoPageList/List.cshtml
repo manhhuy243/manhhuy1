@@ -1,0 +1,31 @@
+﻿@{ 
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <!-- import the included stylesheet for some (very basic) default styling -->
+    <link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+    <div> 
+        <!-- loop through each of your products and display it however you want. we're just printing the name here -->
+        <h2>Danh Sách Sản Phẩm</h2>
+        <ul>
+            @foreach (var items in ViewBag.OnePageOfProducts as IPagedList<SanPham>)
+            {
+                <li>@items.Ten</li>
+            }
+        </ul>
+
+        <!-- output a paging control that lets the user navigation to the previous page, next page, etc -->
+        @Html.PagedListPager((IPagedList)ViewBag.OnePageOfProducts, p => Url.Action("List", new { page = p}))
+    </div>
+</body>
+</html>
