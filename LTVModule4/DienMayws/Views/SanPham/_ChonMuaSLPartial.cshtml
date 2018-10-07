@@ -1,0 +1,9 @@
+﻿@model System.Int32
+@using (Html.BeginForm("Them", "GioHang", new { sanPhamID = Model }, FormMethod.Post, htmlAttributes: new { @style = "display:inline" }))
+{
+    @Html.TextBox("soLuong", 1, htmlAttributes: new { @class = "form-control", @style = "width:70px;display:inline" })
+
+    <button type="submit" class="btn btn-primary" style="margin-bottom:2px;">
+        <i class="fa fa-shopping-cart"></i> Add to cart
+    </button>
+}

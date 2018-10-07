@@ -1,0 +1,9 @@
+﻿  ﻿@{
+      var gioHang = Session["GioHang"] as GioHangModel;
+      int tongsp = 0;
+      if (gioHang != null)
+      {
+          tongsp = gioHang.TongSanPham;
+      }
+}
+<span class="hidden-sm">@tongsp items in cart</span>

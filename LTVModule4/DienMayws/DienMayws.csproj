@@ -212,6 +212,7 @@
     <Compile Include="Controllers\ChungLoaiController.cs" />
     <Compile Include="Controllers\DemoController.cs" />
     <Compile Include="Controllers\DemoPageListController.cs" />
+    <Compile Include="Controllers\GioHangController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SanPhamController.cs" />
@@ -238,6 +239,8 @@
       <DependentUpon>DienMay.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\DienMayMetadata.cs" />
+    <Compile Include="ViewModels\GioHangItem.cs" />
+    <Compile Include="ViewModels\GioHangModel.cs" />
     <Compile Include="Models\HoaDon.cs">
       <DependentUpon>DienMay.tt</DependentUpon>
     </Compile>
@@ -916,6 +919,11 @@
     <Content Include="Views\AdminSanPhams\Upload.cshtml" />
     <Content Include="Views\DemoPageList\Index.cshtml" />
     <Content Include="Views\DemoPageList\List.cshtml" />
+    <Content Include="Views\Shared\_BasketOverviewPartial.cshtml" />
+    <Content Include="Views\SanPham\_ChonMuaSLPartial.cshtml" />
+    <Content Include="Views\GioHang\DatHang.cshtml" />
+    <Content Include="Views\GioHang\DatHangThanhCong.cshtml" />
+    <Content Include="Views\GioHang\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

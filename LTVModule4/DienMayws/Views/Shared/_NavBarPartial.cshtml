@@ -5,7 +5,7 @@
     <div class="container">
         <div class="navbar-header">
 
-            <a class="navbar-brand home" href="index.html" data-animate-hover="bounce">
+            <a class="navbar-brand home" href="@Url.Action("Index","Home")" data-animate-hover="bounce">
                 <img src="~/Images/AspNetMVC_Logo.jpg" alt="Obaju logo" class="hidden-xs">
                 <img src="~/Images/AspNetMVC_Logo_small.jpg" alt="Obaju logo" class="visible-xs"><span class="sr-only">Obaju - go to homepage</span>
             </a>
@@ -18,7 +18,7 @@
                     <span class="sr-only">Toggle search</span>
                     <i class="fa fa-search"></i>
                 </button>
-                <a class="btn btn-default navbar-toggle" href="basket.html">
+                <a class="btn btn-default navbar-toggle" href="@Url.Action("Index","GioHang")">
                     <i class="fa fa-shopping-cart"></i>
                 </a>
             </div>
@@ -43,9 +43,9 @@
         <div class="navbar-buttons">
 
             <div class="navbar-collapse collapse right" id="basket-overview">
-                <a href="basket.html" class="btn btn-primary navbar-btn">
+                <a href="@Url.Action("Index","GioHang")")" class="btn btn-primary navbar-btn">
                     <i class="fa fa-shopping-cart"></i>
-                    <span class="hidden-sm">3 items in cart</span>
+                    @Html.Partial("_BasketOverviewPartial")
                 </a>
             </div>
             <!--/.nav-collapse -->

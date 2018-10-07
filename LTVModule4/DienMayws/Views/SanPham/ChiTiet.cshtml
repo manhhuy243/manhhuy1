@@ -33,10 +33,14 @@
                     </p>*@
                     <p class="price">@Model.GiaBan.ToString("#,##0VND")</p>
 
-                    <p class="text-center buttons">
-                        <a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                        <a href="basket.html" class="btn btn-default"><i class="fa fa-heart"></i> Add to wishlist</a>
-                    </p>
+                    <div class="text-center buttons">
+                        @*@using (Html.BeginForm("Them", "GioHang",new { sanPhamID=Model.SanPhamID }, FormMethod.Post))
+                        {
+                            @Html.TextBox("soLuong",1)
+                            <button class="btn btn-primary" type="submit"><i class="fa fa-shopping-cart">Add to cart</i></button>
+                        }*@
+                        @Html.Partial("_ChonMuaSLPartial",Model.SanPhamID)
+                    </div>
 
 
                 </div>

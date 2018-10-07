@@ -2,16 +2,31 @@
 @{
     ViewBag.Title = "List";
     Layout = "~/Views/Shared/_DienMayLayout.cshtml";
-    var dsSanPham = ViewBag.SanPhams as List<SanPham>;
+    var dsSanPham = ViewBag.SanPhams as IPagedList<SanPham>;
 }
 
 <div class="container">
     <div class="col-md-9">
         <div class="box">
-            <h1>@ViewBag.TieuDe</h1>
+            <h2>@ViewBag.TieuDe</h2>
+            <h3>Trang @dsSanPham.PageNumber<text>/</text>@dsSanPham.PageCount</h3>
+        </div>
+        <div class="text-center">
+            @if(TempData["ChungLoaiID"]!= null)
+            {
+                @Html.PagedListPager(dsSanPham,p=>Url.Action("TraCuuTheoChungLoai",new { id= TempData["ChungLoaiID"], Page=p}))
+            }
+            else if(TempData["LoaiID"] != null)
+            {
+                @Html.PagedListPager(dsSanPham,p=> Url.Action("TraCuuTheoLoai", new { id = TempData["LoaiID"], Page = p }))
+            }
+            else
+            {
+                @Html.PagedListPager(dsSanPham, p => Url.Action("List", new { Page = p }))
+            }
         </div>
         <div class="row products">
-
+            <form id="frmChonMua" method="post"></form>
             @foreach (var item in dsSanPham)
             {
                 <div class="col-md-4 col-sm-6">
@@ -46,7 +61,7 @@
                             <p class="buttons">
                                 @*<a href="@Url.Action("ChiTiet",new { id=item.SanPhamID })" class="btn btn-default">View detail</a>*@
                                 @Html.ActionLink("View detail", "ChiTiet", new { id = item.SanPhamID }, htmlAttributes: new { @class= "btn btn-default" })
-                                <a href="#" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                <button type="submit" class="btn btn-primary" form="frmChonMua" formaction="@Url.Action("Them","GioHang",new { sanPhamID=item.SanPhamID})"><i class="fa fa-shopping-cart"></i>Add to cart</button>
                             </p>
                         </div>
                         <!-- /.text -->

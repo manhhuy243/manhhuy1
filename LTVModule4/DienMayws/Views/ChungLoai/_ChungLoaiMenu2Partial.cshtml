@@ -13,7 +13,12 @@ _________________________________________________________ -->
         <ul class="nav nav-pills nav-stacked category-menu">
             @foreach (var chungloaiItem in dsChungLoai)
             {
-                <li>
+                ViewBag.ChungLoaiAct = null;
+                if(TempData["ChungLoaiID"]!= null&&chungloaiItem.ChungLoaiID==(int)TempData["ChungLoaiID"])
+                {
+                    ViewBag.ChungLoaiAct = "active";
+                }
+                <li class="@ViewBag.ChungLoaiAct">
                     <a href="@Url.Action("TraCuuTheoChungLoai", "SanPham", new { id = chungloaiItem.ChungLoaiID })">
                         @chungloaiItem.Ten
                         <span class="badge pull-right">@chungloaiItem.TongSoSanPham</span>
@@ -21,8 +26,8 @@ _________________________________________________________ -->
                     <ul>
                         @foreach (var loaiItem in chungloaiItem.Loais)
                         {
-                            <li>
-                                @Html.ActionLink(loaiItem.Ten, "TraCuuTheoLooai", "SanPham", new { id = loaiItem.LoaiID }, null)
+                            <li class="@ViewBag.ChungLoaiAct">
+                                @Html.ActionLink(loaiItem.Ten, "TraCuuTheoLoai", "SanPham", new { id = loaiItem.LoaiID }, null)
                             </li>
                         }
                     </ul>

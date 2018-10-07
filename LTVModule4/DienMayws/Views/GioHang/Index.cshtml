@@ -1,0 +1,72 @@
+﻿@model GioHangModel
+
+@{
+    ViewBag.Title = "Giỏ hàng";
+    Layout = "~/Views/Shared/_DienMayLayout.cshtml";
+}
+
+<div style="background-color:#ffffff;margin:15PX;padding:50px 15px;">
+    <h2 class="header-section">Giỏ hàng của bạn</h2>
+
+    @if (Model != null)
+    {
+        <form id="frmXoa" method="post"></form>
+        int stt = 0;
+        <table class="table table-bordered">
+            <thead>
+                <tr class="bg-info">
+                    <td>Stt</td>
+                    <td>Tên sản phẩm</td>
+                    <td>Số lượng</td>
+                    <td>Đơn giá</td>
+                    <td>Thành tiền</td>
+                    <td>Chức năng</td>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model.Items)
+                {
+                    stt++;
+                    var frmHCSL = "frmHCSL" + stt;
+                    <tr>
+                        <td>@stt</td>
+                        <td>@item.SanPham.Ten</td>
+                        <td>
+                            @using (Html.BeginForm("HieuChinh", "GioHang", new { sanPhamID = item.SanPham.SanPhamID }, FormMethod.Post, htmlAttributes: new { @id = frmHCSL, @style = "display:inline" }))
+                            {
+                                var SLID = "SL" + stt;
+                                @Html.TextBox("soLuong", item.SoLuong, htmlAttributes: new { @style = "width:100px", @min = "1", @max = int.MaxValue, @type = "number", @id = SLID })
+                            }
+                        </td>
+                        <td>@item.SanPham.GiaBan.ToString("#,##0VNĐ")</td>
+                        <td> @((item.SanPham.GiaBan * item.SoLuong).ToString("#,##0VNĐ"))</td>
+                        <td>
+                            <button type="submit" class="btn btn-warning btn-sm" form="@frmHCSL">
+                                <i class="fa fa-save"></i>
+                            </button>
+                            <button type="submit" class="btn btn-danger btn-sm"
+                                    form="frmXoa"
+                                    formaction="@Url.Action("Xoa","GioHang",new { sanPhamID= item.SanPham.SanPhamID })">
+                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+
+        <div>
+            Tổng số mặt hàng: @Model.TongSanPham<br />
+            Tổng số lượng: @Model.TongSoLuong<br />
+            Tổng trị giá: @Model.TongTriGia.ToString("#,##0VND")
+        </div>
+        <div>
+            <a href="@Url.Action("DatHang")" class="btn btn-info btn-sm">
+                <i class="fa fa-shopping-cart"></i>Đặt mua
+            </a>
+        </div>
+
+    }
+</div>

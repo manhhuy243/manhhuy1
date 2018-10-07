@@ -26,15 +26,17 @@ _________________________________________________________ -->
                                     </a>
                                 </div>
                                 <div class="back">
-                                    @if (item.Hinh2 != null)
-                                    {
+                                    <a href="@Url.Action("ChiTiet",new { id=item.SanPhamID })">
+                                        @if (item.Hinh2 != null)
+                                        {
 
-                                        <img src="~/Photos/@item.Hinh2" alt="" class="img-responsive" style="height:176px;">
-                                    }
-                                    else
-                                    {
-                                        <img src="~/Photos/@item.Hinh1" alt="" class="img-responsive" style="height:176px;">
-                                    }
+                                            <img src="~/Photos/@item.Hinh2" alt="" class="img-responsive" style="height:176px;">
+                                        }
+                                        else
+                                        {
+                                            <img src="~/Photos/@item.Hinh1" alt="" class="img-responsive" style="height:176px;">
+                                        }
+                                    </a>
                                 </div>
                             </div>
                         </div>
