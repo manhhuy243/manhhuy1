@@ -35,6 +35,7 @@ namespace DienMayws.Controllers
                                       {
                                            ChungLoaiID= cl.ChungLoaiID,
                                            Ten = cl.Ten,
+                                           BiDanh=cl.BiDanh,
                                            TongSoSanPham = cl.Loais.Sum(l=>l.SanPhams.Count),
                                            Loais = cl.Loais
                                       })

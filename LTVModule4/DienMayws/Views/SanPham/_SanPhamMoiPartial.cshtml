@@ -21,12 +21,12 @@ _________________________________________________________ -->
                         <div class="flip-container">
                             <div class="flipper">
                                 <div class="front">
-                                    <a href="@Url.Action("ChiTiet",new { id=item.SanPhamID })">
+                                    <a href="@Url.Action("MR3",new { id=item.SanPhamID,name = item.BiDanh })">
                                         <img src="~/Photos/@item.Hinh1" alt="" class="img-responsive" style="height:176px;">
                                     </a>
                                 </div>
                                 <div class="back">
-                                    <a href="@Url.Action("ChiTiet",new { id=item.SanPhamID })">
+                                    <a href="@Url.Action("MR3",new { id=item.SanPhamID,name = item.BiDanh })">
                                         @if (item.Hinh2 != null)
                                         {
 
@@ -40,12 +40,12 @@ _________________________________________________________ -->
                                 </div>
                             </div>
                         </div>
-                        <a href="@Url.Action("ChiTiet",new { id=item.SanPhamID })" class="invisible">
+                        <a href="@Url.RouteUrl("MR3",new { id=item.SanPhamID,name = item.BiDanh })" class="invisible">
                             <img src="~/Photos/@item.Hinh1" alt="" class="img-responsive" style="height:176px;">
                         </a>
                         <div class="text">
                             <h3>
-                                @Html.ActionLink(item.Ten, "ChiTiet", new { id = item.SanPhamID })
+                                @Html.RouteLink(item.Ten, "MR3", new { id = item.SanPhamID,name = item.BiDanh })
                             </h3>
                             <p class="price">@item.GiaBan.ToString("#,##0VND")</p>
                         </div>

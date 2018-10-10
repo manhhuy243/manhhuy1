@@ -79,6 +79,14 @@ namespace DienMayws.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        //bổ sung 2
+        [Display(Name ="Tên")]
+        public string FistName { get; set; }
+        [Display(Name = "Họ và Tên Lót")]
+        public string LastName { get; set; }
+        [Display(Name ="Địa Chỉ")]
+        public string Address { get; set; }
     }
 
     public class ResetPasswordViewModel

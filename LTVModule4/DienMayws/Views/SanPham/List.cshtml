@@ -34,12 +34,12 @@
                         <div class="flip-container">
                             <div class="flipper">
                                 <div class="front">
-                                    <a href="@Url.Action("ChiTiet",new { id=item.SanPhamID })">
+                                    <a href="@Url.Action("ChiTiet",new { id=item.SanPhamID,name=item.BiDanh })">
                                         <img src="~/Photos/@item.Hinh1" alt="" class="img-responsive" style="height:176px;">
                                     </a>
                                 </div>
                                 <div class="back">
-                                    <a href="@Url.Action("ChiTiet",new { id=item.SanPhamID })">
+                                    <a href="@Url.Action("ChiTiet",new { id=item.SanPhamID,name=item.BiDanh })">
                                         @if (item.Hinh2 != null)
                                         {
                                             <img src="~/Photos/@item.Hinh2" alt="" class="img-responsive" style="height:176px;">
@@ -52,16 +52,16 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="@Url.Action("ChiTiet",new { id=item.SanPhamID })" class="invisible">
+                        <a href="@Url.Action("ChiTiet",new { id=item.SanPhamID,name=item.BiDanh })" class="invisible">
                             <img src="~/Photos/@item.Hinh1" alt="" class="img-responsive" style="height:176px;">
                         </a>
                         <div class="text">
-                            <h3><a href="@Url.Action("ChiTiet",new { id=item.SanPhamID })">@item.Ten</a></h3>
+                            <h3><a href="@Url.Action("ChiTiet",new { id=item.SanPhamID,name=item.BiDanh })">@item.Ten</a></h3>
                             <p class="price">@item.GiaBan</p>
                             <p class="buttons">
                                 @*<a href="@Url.Action("ChiTiet",new { id=item.SanPhamID })" class="btn btn-default">View detail</a>*@
-                                @Html.ActionLink("View detail", "ChiTiet", new { id = item.SanPhamID }, htmlAttributes: new { @class= "btn btn-default" })
-                                <button type="submit" class="btn btn-primary" form="frmChonMua" formaction="@Url.Action("Them","GioHang",new { sanPhamID=item.SanPhamID})"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                                @Html.ActionLink("View detail", "ChiTiet", new { id = item.SanPhamID, name = item.BiDanh }, htmlAttributes: new { @class= "btn btn-default" })
+                                <button type="submit" class="btn btn-primary" form="frmChonMua" formaction="@Url.Action("Them","GioHang",new { sanPhamID=item.SanPhamID,name=item.BiDanh})"><i class="fa fa-shopping-cart"></i>Add to cart</button>
                             </p>
                         </div>
                         <!-- /.text -->

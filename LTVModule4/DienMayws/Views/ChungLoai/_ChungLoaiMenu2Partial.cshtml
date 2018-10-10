@@ -14,20 +14,22 @@ _________________________________________________________ -->
             @foreach (var chungloaiItem in dsChungLoai)
             {
                 ViewBag.ChungLoaiAct = null;
+                ViewBag.LoaiAct = null;
                 if(TempData["ChungLoaiID"]!= null&&chungloaiItem.ChungLoaiID==(int)TempData["ChungLoaiID"])
                 {
                     ViewBag.ChungLoaiAct = "active";
                 }
                 <li class="@ViewBag.ChungLoaiAct">
-                    <a href="@Url.Action("TraCuuTheoChungLoai", "SanPham", new { id = chungloaiItem.ChungLoaiID })">
+                    <a href="@Url.Action("TraCuuTheoChungLoai", "SanPham", new { id = chungloaiItem.ChungLoaiID,name=chungloaiItem.BiDanh })">
                         @chungloaiItem.Ten
                         <span class="badge pull-right">@chungloaiItem.TongSoSanPham</span>
                     </a>
                     <ul>
                         @foreach (var loaiItem in chungloaiItem.Loais)
                         {
+                            
                             <li class="@ViewBag.ChungLoaiAct">
-                                @Html.ActionLink(loaiItem.Ten, "TraCuuTheoLoai", "SanPham", new { id = loaiItem.LoaiID }, null)
+                                @Html.ActionLink(loaiItem.Ten, "TraCuuTheoLoai", "SanPham", new { id = loaiItem.LoaiID ,name=loaiItem.BiDanh}, null)
                             </li>
                         }
                     </ul>

@@ -41,7 +41,7 @@ namespace DienMayws.Controllers
         }
 
         //Get: SanPham/ChiTiet/417
-        public ActionResult ChiTiet(int? id)
+        public ActionResult ChiTiet(int? id,string name)
         {
             if (id == null || id < 1)
             {
@@ -89,7 +89,7 @@ namespace DienMayws.Controllers
             }
         }
         //Get: SanPham/TraCuuTheoChungLoai/3
-        public ActionResult TraCuuTheoChungLoai(int? id,int? page)
+        public ActionResult TraCuuTheoChungLoai(int? id,string name,int? page)
         {
             if (id == null || id < 1) return RedirectToAction("List");
             try
@@ -104,8 +104,9 @@ namespace DienMayws.Controllers
                                              .ToPagedList(page.Value,6);
 
                 //truyền dữ liệu qua view
-                TempData["ChungLoaiID"] = sanPhamItems;
-                ViewBag.TieuDe = "Danh sách sản phẩm - " + chungLoaiItem.Ten;
+                TempData["ChungLoaiID"] = id;
+                ViewBag.SanPhams = sanPhamItems;
+               ViewBag.TieuDe = "Danh sách sản phẩm - " + chungLoaiItem.Ten;
             }
             catch (Exception ex)
             {
@@ -118,7 +119,7 @@ namespace DienMayws.Controllers
             //Chỉ Định view "List" hiển thị     
             return View("List");
         }
-        public ActionResult TraCuuTheoLoai(int? id, int? page)
+        public ActionResult TraCuuTheoLoai(int? id,string name, int? page)
         {
             if (id == null || id < 1) return RedirectToAction("List");
             try
@@ -133,8 +134,9 @@ namespace DienMayws.Controllers
                                                      .ToPagedList(page.Value, 6);
 
                 //truyền dữ liệu qua view
-                TempData["LoaiID"] = sanPhamItems;
-                ViewBag.TieuDe = "Danh sách sản phẩm - " + loaiItem.Ten;
+                TempData["LoaiID"] = id;
+                ViewBag.SanPhams = sanPhamItems;
+               ViewBag.TieuDe = "Danh sách sản phẩm - " + loaiItem.Ten;
             }
             catch (Exception ex)
             {

@@ -12,6 +12,23 @@ namespace DienMayws
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.MapMvcAttributeRoutes();
+            routes.MapRoute(
+                name: "MR2",
+                url: "thong-tin-san-pham/{name}-{id}",
+                defaults:new { Controller="SanPham",action="ChiTiet"});
+
+            routes.MapRoute(
+                name: "MR1",
+                url: "{controller}/{action}/{name}-{id}"
+              
+            );
+
+            routes.MapRoute(
+                name: "MR3",
+                url: "xem-thong-tin/{name}-{id}",
+                defaults: new { Controller = "SanPham", action = "ChiTiet" });
+
 
             routes.MapRoute(
                 name: "Default",

@@ -211,6 +211,7 @@
     <Compile Include="Controllers\AdminSanPhamsController.cs" />
     <Compile Include="Controllers\ChungLoaiController.cs" />
     <Compile Include="Controllers\DemoController.cs" />
+    <Compile Include="Controllers\DemoIdentityController.cs" />
     <Compile Include="Controllers\DemoPageListController.cs" />
     <Compile Include="Controllers\GioHangController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -924,6 +925,7 @@
     <Content Include="Views\GioHang\DatHang.cshtml" />
     <Content Include="Views\GioHang\DatHangThanhCong.cshtml" />
     <Content Include="Views\GioHang\Index.cshtml" />
+    <Content Include="Views\DemoIdentity\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -935,6 +937,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

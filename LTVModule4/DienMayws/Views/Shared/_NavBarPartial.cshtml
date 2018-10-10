@@ -1,4 +1,5 @@
-﻿<!-- *** NAVBAR ***
+﻿@model List<SanPham>
+<!-- *** NAVBAR ***
  _________________________________________________________ -->
 
 <div class="navbar navbar-default yamm" role="navigation" id="navbar">
@@ -66,7 +67,7 @@
                     <input type="text" class="form-control" placeholder="Search">
                     <span class="input-group-btn">
 
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                        <button type="submit" href="@Url.Action("List","SanPham")" class="btn btn-primary"><i class="fa fa-search"></i></button>
 
                     </span>
                 </div>

@@ -247,3 +247,4 @@ C:\Users\HV\Documents\GitHub\manhhuy1\LTVModule4\DienMayws\bin\PagedList.dll
 C:\Users\HV\Documents\GitHub\manhhuy1\LTVModule4\DienMayws\bin\PagedList.Mvc.dll
 C:\Users\HV\Documents\GitHub\manhhuy1\LTVModule4\DienMayws\bin\PagedList.xml
 C:\Users\HV\Documents\GitHub\manhhuy1\LTVModule4\DienMayws\bin\PagedList.Mvc.xml
+C:\Users\HV\Documents\GitHub\manhhuy1\LTVModule4\DienMayws\obj\Debug\DienMayws.csprojResolveAssemblyReference.cache

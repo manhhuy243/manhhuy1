@@ -16,6 +16,11 @@ namespace DienMayws.Models
             // Add custom user claims here
             return userIdentity;
         }
+        //bổ sung
+        public string FistName { get; set; }
+        public string LastName { get; set; }
+        public string Address { get; set; }
+
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

@@ -10,12 +10,18 @@ using DienMayws.Models;
 
 namespace DienMayws.Controllers
 {
+    [RoutePrefix("quan-ly/loai")]
+    [Authorize]
     public class AdminLoaiController : Controller
     {
+        
         private DienMayDBContext db = new DienMayDBContext();
 
         // GET: AdminLoai
         #region xem thông tin
+        [Route("xem-danh-sach")]
+        //GET:quan-ly/loai/xem-chi-tiet
+        [AllowAnonymous]//không cần đăng nhập.
         public ActionResult Index()
         {
             //bẩy lỗi trên view
@@ -25,8 +31,9 @@ namespace DienMayws.Controllers
             ViewBag.LoaiAct = "active";
             return View(query);
         }
-
-        // GET: AdminLoai/Details/5
+        [Route("xem-chi-tiet-{id}")]
+        //GET:quan-ly/loai/xem-chi-tiet-5
+        [Authorize(Roles ="QuanLy,NhanVien")]
         public ActionResult Details(int? id)
         {
             // nếu id = null trở về trang chủ
@@ -53,7 +60,9 @@ namespace DienMayws.Controllers
         #endregion
 
         #region tạo 
-        // GET: AdminLoai/Create
+        [Route("them-moi")]
+        //GET:quan-ly/loai/them-moi
+        [Authorize(Roles ="NhanVien")]
         public ActionResult Create()
         {
             try
@@ -70,7 +79,9 @@ namespace DienMayws.Controllers
             }
         }
 
-        // POST: AdminLoai/Create
+        [Route("them-moi")]
+        // POST: quan-ly/loai/them-moi
+        [Authorize(Roles = "NhanVien")]
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -109,7 +120,9 @@ namespace DienMayws.Controllers
         #endregion
 
         #region sữa
-        // GET: AdminLoai/Edit/5
+        [Route("hieu-chinh-{id}")]
+        // GET: quan-ly/loai/hieu-chinh-5
+        [Authorize(Roles = "NhanVien")]
         public ActionResult Edit(int? id)
         {           
             // nếu id = null trở về trang chủ
@@ -134,7 +147,9 @@ namespace DienMayws.Controllers
             }
         }
 
-        // POST: AdminLoai/Edit/5
+        [Route("hieu-chinh-{id}")]
+        // POST: quan-ly/loai/hieu-chinh-5
+        [Authorize(Roles = "NhanVien")]
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -174,7 +189,9 @@ namespace DienMayws.Controllers
 
         #region xoá
         [HttpGet]
-        // GET: AdminLoai/Delete/5
+        [Route("xoa-{id?}")]
+        // GET: quan-ly/loai/xoa-5
+        [Authorize(Users ="admin@gmail.com")]
         public ActionResult Delete(int? id)
         {
             if (id == null||id<1)
@@ -198,8 +215,8 @@ namespace DienMayws.Controllers
             }
         }
 
-
-        // POST: AdminLoai/Delete/5
+        [Route("xoa-{id?}")]
+        // POST: quan-ly/loai/xoa-5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
