@@ -150,5 +150,14 @@ namespace DienMayws.Controllers
             return View("List");
         }
         #endregion
-    }
+        public ActionResult TraCuuTheoTen( string NoiDungTim)
+        {
+            var items = db.SanPhams
+                        .Where(p => p.Ten.Contains(NoiDungTim))
+                        .ToList();
+            ViewBag.SanPhams = items;
+            return View("KetQuaTim");
+        }
+
+        }
 }

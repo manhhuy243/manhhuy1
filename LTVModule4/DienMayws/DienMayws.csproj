@@ -926,6 +926,7 @@
     <Content Include="Views\GioHang\DatHangThanhCong.cshtml" />
     <Content Include="Views\GioHang\Index.cshtml" />
     <Content Include="Views\DemoIdentity\Index.cshtml" />
+    <Content Include="Views\SanPham\KetQuaTim.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
